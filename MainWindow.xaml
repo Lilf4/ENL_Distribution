@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ENF_Dist_Test"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+    <Grid Background="Green">
+        <Frame Source="/Pages/MainPage.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
