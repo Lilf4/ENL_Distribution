@@ -21,5 +21,19 @@ namespace ENF_Dist_Test.Pages {
         public OrderPage() {
             InitializeComponent();
         }
+
+        private void NavBack(object sender, RoutedEventArgs e) {
+            NavigationService.GoBack();
+        }
+
+        private void Add(object sender, RoutedEventArgs e) {
+
+        }
+        private void Update(object sender, RoutedEventArgs e) {
+
+        }
+        private void Delete(object sender, RoutedEventArgs e) {
+
+        }
     }
 }
