@@ -1,10 +1,16 @@
+using System.ComponentModel;
+
 namespace ENF_Dist_Test
 {
     public class Product{
-        int ProductId {get; set;}
-        string Name {get; set;} = string.Empty;
-        int Count {get; set;}
-        string Description {get; set;} = string.Empty;
-        string LocationId {get; set;} = string.Empty;
+        public int ProductId {get; set;}
+        public string Name {get; set;} = string.Empty;
+        public int Count {get; set;}
+        public string Description {get; set;} = string.Empty;
+        public Location Location { get; set; } = new();
+
+        public override string ToString() {
+            return Name;
+        }
     }
 }
