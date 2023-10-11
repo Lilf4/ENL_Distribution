@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ENF_Dist_Test.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace ENF_Dist_Test.Pages {
     /// Interaction logic for Order.xaml
     /// </summary>
     public partial class OrderPage : Page {
+        Order selectedOrder;
+
         public OrderPage() {
             InitializeComponent();
         }
@@ -27,10 +30,18 @@ namespace ENF_Dist_Test.Pages {
         }
 
         private void Add(object sender, RoutedEventArgs e) {
-
+            OrderEdit orderEdit = new OrderEdit(new(), false);
+            orderEdit.ShowDialog();
+            if (!orderEdit.AddCancel) {
+                selectedOrder = orderEdit.Order;
+            }
         }
         private void Update(object sender, RoutedEventArgs e) {
-
+            OrderEdit orderEdit = new OrderEdit(selectedOrder, true);
+            orderEdit.ShowDialog();
+            if (!orderEdit.AddCancel) {
+                selectedOrder = orderEdit.Order;
+            }
         }
         private void Delete(object sender, RoutedEventArgs e) {
 
