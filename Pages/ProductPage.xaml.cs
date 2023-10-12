@@ -4,10 +4,13 @@ using System.Windows.Controls;
 
 namespace ENF_Dist_Test.Pages{
     public partial class ProductPage : Page{
-        public Product selectedProduct { get; set; } = new Product();
 
         public ProductPage(){
             InitializeComponent();
+            updateTable();
+        }
+        private void updateTable() {
+            DataGrid.ItemsSource = Database.Instance.GetAllProducts();
         }
 
         private void NavBack(object sender, RoutedEventArgs e){
@@ -15,21 +18,32 @@ namespace ENF_Dist_Test.Pages{
         }
 
         private void Add(object sender, RoutedEventArgs e) {
-            ProductEdit productEdit = new ProductEdit(new(), false);
+            ProductEdit productEdit = new ProductEdit(new() { ProductId = Database.Instance.GetNextID("Products")}, false);
             productEdit.ShowDialog();
             if (!productEdit.AddCancel) {
-                selectedProduct = productEdit.Product;
+                Database.Instance.InsertLocation(productEdit.product.Location);
+                Database.Instance.InsertProduct(productEdit.product);
+                updateTable();
             }
         }
         private void Update(object sender, RoutedEventArgs e) {
-            ProductEdit productEdit = new ProductEdit(selectedProduct, true);
+            ProductEdit productEdit = new ProductEdit((Product)DataGrid.SelectedItem, true);
+            string prevLocation = productEdit.product.Location.LocationId;
             productEdit.ShowDialog();
             if (!productEdit.AddCancel) {
-                selectedProduct = productEdit.Product;
+                Database.Instance.InsertLocation(productEdit.Product.Location);
+                Database.Instance.UpdateProduct(productEdit.product, productEdit.product.ProductId);
+                Database.Instance.DeleteLocation(prevLocation);
+                updateTable();
             }
         }
         private void Delete(object sender, RoutedEventArgs e) {
-
+            Product product = (Product)DataGrid.SelectedItem;
+            if (MessageBox.Show($"Are you sure you want to delete {product}?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes) {
+                Database.Instance.DeleteProduct(product.ProductId);
+                Database.Instance.DeleteLocation(product.Location.LocationId);
+                updateTable();
+            }
         }
     }
 }

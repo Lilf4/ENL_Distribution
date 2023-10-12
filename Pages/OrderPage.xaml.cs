@@ -19,32 +19,39 @@ namespace ENF_Dist_Test.Pages {
     /// Interaction logic for Order.xaml
     /// </summary>
     public partial class OrderPage : Page {
-        Order selectedOrder;
-
         public OrderPage() {
             InitializeComponent();
+            updateTable();
         }
-
+        private void updateTable() {
+            DataGrid.ItemsSource = Database.Instance.GetAllOrders();
+        }
         private void NavBack(object sender, RoutedEventArgs e) {
             NavigationService.GoBack();
         }
 
         private void Add(object sender, RoutedEventArgs e) {
-            OrderEdit orderEdit = new OrderEdit(new(), false);
+            OrderEdit orderEdit = new OrderEdit(new() { OrderId = Database.Instance.GetNextID("Orders") }, false);
             orderEdit.ShowDialog();
             if (!orderEdit.AddCancel) {
-                selectedOrder = orderEdit.Order;
+                Database.Instance.InsertOrder(orderEdit.order);
+                updateTable();
             }
         }
         private void Update(object sender, RoutedEventArgs e) {
-            OrderEdit orderEdit = new OrderEdit(selectedOrder, true);
+            OrderEdit orderEdit = new OrderEdit((Order)DataGrid.SelectedItem, true);
             orderEdit.ShowDialog();
             if (!orderEdit.AddCancel) {
-                selectedOrder = orderEdit.Order;
+                Database.Instance.UpdateOrder(orderEdit.order, orderEdit.order.OrderId);
+                updateTable();
             }
         }
         private void Delete(object sender, RoutedEventArgs e) {
-
+            Order order = (Order)DataGrid.SelectedItem;
+            if (MessageBox.Show($"Are you sure you want to delete {order}?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes) {
+                Database.Instance.DeleteOrder(order.OrderId);
+                updateTable();
+            }
         }
     }
 }
