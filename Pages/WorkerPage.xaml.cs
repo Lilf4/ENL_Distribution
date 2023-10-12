@@ -1,14 +1,16 @@
 using ENF_Dist_Test.Windows;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace ENF_Dist_Test.Pages{
-    public partial class WorkerPage : Page{
+    public partial class WorkerPage : Page {
 
         public WorkerPage(){
             InitializeComponent();
+            updateButtons(null, null);
             updateTable();
         }
 
@@ -16,6 +18,14 @@ namespace ENF_Dist_Test.Pages{
             DataGrid.ItemsSource = Database.Instance.GetAllEmployees();
         }
 
+        public void updateButtons(object sender, RoutedEventArgs e) {
+            UpdateBtn.IsEnabled = hasSelected;
+            DeleteBtn.IsEnabled = hasSelected;
+        }
+
+        public bool hasSelected {
+            get { return DataGrid.SelectedItem != null; }
+        }
         private void NavBack(object sender, RoutedEventArgs e) {
             NavigationService.GoBack();
         }

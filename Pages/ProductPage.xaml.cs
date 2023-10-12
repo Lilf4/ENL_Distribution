@@ -7,12 +7,20 @@ namespace ENF_Dist_Test.Pages{
 
         public ProductPage(){
             InitializeComponent();
+            updateButtons(null, null);
             updateTable();
         }
         private void updateTable() {
             DataGrid.ItemsSource = Database.Instance.GetAllProducts();
         }
+        public void updateButtons(object sender, RoutedEventArgs e) {
+            UpdateBtn.IsEnabled = hasSelected;
+            DeleteBtn.IsEnabled = hasSelected;
+        }
 
+        public bool hasSelected {
+            get { return DataGrid.SelectedItem != null; }
+        }
         private void NavBack(object sender, RoutedEventArgs e){
             NavigationService.GoBack();
         }
