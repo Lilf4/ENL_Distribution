@@ -29,13 +29,12 @@
 
         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">OrderId</Label>
         <TextBox TextWrapping="Wrap" Text="{Binding Path=Order.OrderId}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" IsEnabled="False"/>
-        
-        <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Employee</Label>
 
-        <ComboBox  Text="TODO" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+        <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Employee</Label>
+        <ComboBox x:Name="EmployeeCombo" SelectedItem="{Binding Path=Order.Employee}" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Product</Label>
-        <ComboBox Text="TODO" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+        <ComboBox x:Name="ProductCombo" SelectedItem="{Binding Path=Order.Product}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Quantity</Label>
         <TextBox TextWrapping="Wrap" Text="{Binding Path=Order.Quantity, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>

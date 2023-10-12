@@ -40,6 +40,12 @@ namespace ENF_Dist_Test.Windows {
             Title.Content = AddEdit ? "Edit Order" : "Add Order";
             Order = order;
 
+            EmployeeCombo.ItemsSource = Database.Instance.GetAllEmployees();
+            EmployeeCombo.SelectedIndex = 0;
+
+            ProductCombo.ItemsSource = Database.Instance.GetAllProducts();
+            ProductCombo.SelectedIndex = 0;
+
             StatusCombo.ItemsSource = Enum.GetValues(typeof(Order.Status)).Cast<Order.Status> ();
             StatusCombo.SelectedIndex = (int)Order.OrderStatus;
         }

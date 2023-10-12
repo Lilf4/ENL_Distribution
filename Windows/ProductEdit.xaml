@@ -33,7 +33,7 @@
         <TextBox TextWrapping="Wrap" Text="{Binding Path=Product.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Count</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Product.Count, UpdateSourceTrigger=PropertyChanged}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding Path=Product.Quantity, UpdateSourceTrigger=PropertyChanged}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Decription</Label>
         <TextBox TextWrapping="Wrap" Text="{Binding Path=Product.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
