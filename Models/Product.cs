@@ -10,7 +10,10 @@ namespace ENF_Dist_Test
         public Location Location { get; set; } = new();
 
         public override string ToString() {
-            return Name;
+            return $"{Name}";
+        }
+        public string NameQuanty {
+            get { return $"{Name} ({Quantity})"; }
         }
     }
 }

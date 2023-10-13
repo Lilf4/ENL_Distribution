@@ -1,6 +1,8 @@
+using System.ComponentModel;
+
 namespace ENF_Dist_Test
 {
-    public class Order{
+    public class Order {
         public int OrderId {get; set;}
         public Employee Employee { get; set; } = new();
         public Product Product { get; set; } = new();
