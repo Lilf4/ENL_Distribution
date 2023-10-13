@@ -29,3 +29,12 @@ CREATE TABLE Orders(
     Quantity INT,
     OrderStatus TINYINT
 )
+
+CREATE TABLE FinishedOrders(
+    OrderId INT,
+    EmployeeFirstName VARCHAR(64),
+    EmployeeLastName VARCHAR(64),
+    Product VARCHAR(64),
+    Quantity INT,
+    OrderStatus TINYINT
+)
