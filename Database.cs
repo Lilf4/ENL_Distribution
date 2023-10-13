@@ -3,45 +3,32 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Reflection.PortableExecutable;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace ENF_Dist_Test {
     public class Database {
-        public static readonly Database Instance = new Database();
+        private config config;
+        public static readonly Database Instance = new();
 
         private SqlConnection getConnection() {
-            SqlConnectionStringBuilder sb = new();
-            sb.DataSource = "DESKTOP-J88769P\\MSSQLSERVER01";
-            sb.InitialCatalog = "ENL_Distribution";
-            sb.UserID = "ENL_Login";
-            sb.Password = "ENL_Login";
+            SqlConnectionStringBuilder sb = new() {
+                DataSource = config.dataSource,
+                InitialCatalog = config.dataBase,
+                UserID = config.UserID,
+                Password = config.password
+            };
             string connectionString = sb.ToString();
             return new SqlConnection(connectionString);
         }
 
         public Database() {
-
-        }
-
-        private DataTable QueryDataTable(string sql) {
-            using (SqlConnection connection = getConnection()) {
-                connection.Open();
-
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = sql;
-
-                DataTable dt = new();
-
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-                adapter.Fill(dt);
-
-                connection.Close();
-
-                return dt;
+            string configData = File.ReadAllText("config.json");
+            if(configData != null) {
+                config = JsonConvert.DeserializeObject<config>(configData);
             }
-
         }
+
         public int GetNextID(string table) {
             string SQL = $"SELECT IDENT_CURRENT('{table}') + IDENT_INCR('{table}')";
             return (int)queryDecimal(SQL);
@@ -85,7 +72,7 @@ namespace ENF_Dist_Test {
 
         #region Location
         List<Location> LocationQuery(string sql) {
-            List<Location> locations = new List<Location>();
+            List<Location> locations = new();
 
             SqlDataReader reader;
             using (SqlConnection connection = getConnection()) {
@@ -110,7 +97,7 @@ namespace ENF_Dist_Test {
             return locations;
         }
         public Location GetLocation(string LocationId) {
-            string SQL = $"SELECT * FROM Locations WHERE LocationId = {LocationId}";
+            string SQL = $"SELECT * FROM Locations WHERE LocationId = '{LocationId}'";
             return LocationQuery(SQL)[0];
         }
         public List<Location> GetAllLocations() {
@@ -123,14 +110,14 @@ namespace ENF_Dist_Test {
             return execute(SQL);
         }
         public int DeleteLocation(string LocationId) {
-            string SQL = $"DELETE FROM Locations WHERE LocationId = {LocationId}";
+            string SQL = $"DELETE FROM Locations WHERE LocationId = '{LocationId}'";
             return execute(SQL);
         }
         #endregion
 
         #region Product
         List<Product> ProductQuery(string sql) {
-            List<Product> products = new List<Product>();
+            List<Product> products = new();
 
             SqlDataReader reader;
             using (SqlConnection connection = getConnection()) {
@@ -142,7 +129,7 @@ namespace ENF_Dist_Test {
                 reader = command.ExecuteReader();
 
                 while (reader.Read()) {
-                    Product product = new Product() {
+                    Product product = new() {
                         ProductId = reader.GetInt32(0),
                         Name = reader.GetString(1),
                         Quantity = reader.GetInt32(2),
@@ -184,7 +171,7 @@ namespace ENF_Dist_Test {
 
         #region Employee
         List<Employee> EmployeeQuery(string sql) {
-            List<Employee> employees = new List<Employee>();
+            List<Employee> employees = new();
 
             SqlDataReader reader;
             using (SqlConnection connection = getConnection()) {
@@ -196,7 +183,7 @@ namespace ENF_Dist_Test {
                 reader = command.ExecuteReader();
 
                 while (reader.Read()) {
-                    Employee customer = new Employee() {
+                    Employee customer = new() {
                         EmployeeId = reader.GetInt32(0),
                         CompletedOrders = reader.GetInt32(1),
                         FirstName = reader.GetString(2),
@@ -241,7 +228,7 @@ namespace ENF_Dist_Test {
 
         #region Order
         List<Order> OrderQuery(string sql) {
-            List<Order> orders = new List<Order>();
+            List<Order> orders = new();
 
             SqlDataReader reader;
             using (SqlConnection connection = getConnection()) {
@@ -253,7 +240,7 @@ namespace ENF_Dist_Test {
                 reader = command.ExecuteReader();
 
                 while (reader.Read()) {
-                    Order order = new Order() {
+                    Order order = new() {
                         OrderId = reader.GetInt32(0),
                         Employee = GetEmployee(reader.GetInt32(1)),
                         Product = GetProduct(reader.GetInt32(2)),
@@ -268,17 +255,54 @@ namespace ENF_Dist_Test {
 
             return orders;
         }
+        List<Order> FinishedOrderQuery(string sql) {
+            List<Order> orders = new();
+
+            SqlDataReader reader;
+            using (SqlConnection connection = getConnection()) {
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = sql;
+
+                reader = command.ExecuteReader();
+
+                while (reader.Read()) {
+                    Order order = new() {
+                        OrderId = reader.GetInt32(0),
+                        Employee = new() { FirstName = reader.GetString(1), LastName = reader.GetString(2)},
+                        Product = new() { Name = reader.GetString(3)},
+                        Quantity = reader.GetInt32(4),
+                        OrderStatus = (Order.Status)reader.GetByte(5)
+                    };
+                    orders.Add(order);
+                }
+
+                connection.Close();
+            }
+
+            return orders;
+        }
         public Order GetOrder(int OrderId) {
             string SQL = $"SELECT * FROM Orders WHERE OrderId = {OrderId}";
             return OrderQuery(SQL)[0];
         }
         public List<Order> GetAllOrders() {
-            string SQL = $"SELECT * FROM Orders";
-            return OrderQuery(SQL);
+            string SQL1 = $"SELECT * FROM Orders";
+            string SQL2 = $"SELECT * FROM FinishedOrders";
+            List<Order> orders = OrderQuery(SQL1);
+            List<Order> orders2 = FinishedOrderQuery(SQL2);
+            orders.AddRange(orders2);
+            return orders;
         }
         public int InsertOrder(Order Order) {
             string SQL = $"INSERT INTO Orders (EmployeeId, ProductId, Quantity, OrderStatus)\r\n" +
                 $"VALUES ({Order.Employee.EmployeeId}, {Order.Product.ProductId}, {Order.Quantity}, {(byte)Order.OrderStatus})";
+            return execute(SQL);
+        }
+        public int InsertFinishedOrder(Order Order) {
+            string SQL = $"INSERT INTO FinishedOrders (OrderId, EmployeeFirstName, EmployeeLastName, Product, Quantity, OrderStatus)\r\n" +
+                $"VALUES ({Order.OrderId}, '{Order.Employee.FirstName}', '{Order.Employee.LastName}', '{Order.Product.Name}', {Order.Quantity}, {(byte)Order.OrderStatus})";
             return execute(SQL);
         }
         public int UpdateOrder(Order Order, int OrderId) {
