@@ -10,20 +10,20 @@ namespace ENF_Dist_Test.Pages{
 
         public WorkerPage(){
             InitializeComponent();
-            updateButtons(null, null);
-            updateTable();
+            UpdateButtons(null, null);
+            UpdateTable();
         }
 
-        private void updateTable() {
+        private void UpdateTable() {
             DataGrid.ItemsSource = Database.Instance.GetAllEmployees();
         }
 
-        public void updateButtons(object sender, RoutedEventArgs e) {
-            UpdateBtn.IsEnabled = hasSelected;
-            DeleteBtn.IsEnabled = hasSelected;
+        public void UpdateButtons(object? sender, RoutedEventArgs? e) {
+            UpdateBtn.IsEnabled = HasSelected;
+            DeleteBtn.IsEnabled = HasSelected;
         }
 
-        public bool hasSelected {
+        public bool HasSelected {
             get { return DataGrid.SelectedItem != null; }
         }
         private void NavBack(object sender, RoutedEventArgs e) {
@@ -31,26 +31,26 @@ namespace ENF_Dist_Test.Pages{
         }
 
         private void Add(object sender, RoutedEventArgs e) {
-            WorkerEdit workerEdit = new WorkerEdit(new() { EmployeeId = Database.Instance.GetNextID("Employees")}, false);
+            WorkerEdit workerEdit = new(new() { EmployeeId = Database.Instance.GetNextID("Employees")}, false);
             workerEdit.ShowDialog();
             if (!workerEdit.AddCancel) {
                 Database.Instance.InsertEmployee(workerEdit.Employee);
-                updateTable();
+                UpdateTable();
             }
         }
         private void Update(object sender, RoutedEventArgs e) {
-            WorkerEdit workerEdit = new WorkerEdit((Employee)DataGrid.SelectedItem, true);
+            WorkerEdit workerEdit = new((Employee)DataGrid.SelectedItem, true);
             workerEdit.ShowDialog();
             if (!workerEdit.AddCancel) {
                 Database.Instance.UpdateEmployee(workerEdit.Employee, workerEdit.Employee.EmployeeId);
-                updateTable();
+                UpdateTable();
             }
         }
         private void Delete(object sender, RoutedEventArgs e) {
             Employee employee = (Employee)DataGrid.SelectedItem;
             if(MessageBox.Show($"Are you sure you want to delete {employee}?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes) {
                 Database.Instance.DeleteEmployee(employee.EmployeeId);
-                updateTable();
+                UpdateTable();
             }
         }
     }

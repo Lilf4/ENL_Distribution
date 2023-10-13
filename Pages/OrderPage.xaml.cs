@@ -21,47 +21,74 @@ namespace ENF_Dist_Test.Pages {
     public partial class OrderPage : Page {
         public OrderPage() {
             InitializeComponent();
-            updateButtons(null, null);
-            updateTable();
+            UpdateButtons(null, null);
+            UpdateTable();
         }
-        private void updateTable() {
+        private void UpdateTable() {
             DataGrid.ItemsSource = Database.Instance.GetAllOrders();
         }
 
-        public void updateButtons(object sender, RoutedEventArgs e) {
-            UpdateBtn.IsEnabled = hasSelected;
-            DeleteBtn.IsEnabled = hasSelected;
+        public void UpdateButtons(object? sender, RoutedEventArgs? e) {
+            UpdateBtn.IsEnabled = HasSelected;
+            DeleteBtn.IsEnabled = HasSelected;
         }
 
-        public bool hasSelected {
-            get { return DataGrid.SelectedItem != null; }
+        public bool HasSelected {
+            get { 
+                if(DataGrid.SelectedItem != null) {
+                    return ((Order)DataGrid.SelectedItem).OrderStatus != Order.Status.Finished;
+                } 
+                return false;
+            }
         }
 
-        private void NavBack(object sender, RoutedEventArgs e) {
+        private void NavBack(object? sender, RoutedEventArgs? e) {
             NavigationService.GoBack();
         }
 
-        private void Add(object sender, RoutedEventArgs e) {
-            OrderEdit orderEdit = new OrderEdit(new() { OrderId = Database.Instance.GetNextID("Orders") }, false);
+        private void FinishOrder(Order order) {
+            order.Employee.CompletedOrders++;
+            order.Product.Quantity -= order.Quantity;
+            Database.Instance.UpdateProduct(order.Product, order.Product.ProductId);
+            Database.Instance.UpdateEmployee(order.Employee, order.Employee.EmployeeId);
+        }
+
+        private void Add(object? sender, RoutedEventArgs? e) {
+            OrderEdit orderEdit = new(new() { OrderId = Database.Instance.GetNextID("Orders") }, false);
             orderEdit.ShowDialog();
             if (!orderEdit.AddCancel) {
-                Database.Instance.InsertOrder(orderEdit.order);
-                updateTable();
+                if (orderEdit.Order.OrderStatus == Order.Status.Finished) {
+                    Database.Instance.InsertFinishedOrder(orderEdit.Order);
+                    FinishOrder(orderEdit.Order);
+                }
+                else {
+                    Database.Instance.InsertOrder(orderEdit.Order);
+                }
+                UpdateTable();
             }
         }
-        private void Update(object sender, RoutedEventArgs e) {
-            OrderEdit orderEdit = new OrderEdit((Order)DataGrid.SelectedItem, true);
+        private void Update(object? sender, RoutedEventArgs? e) {
+            OrderEdit orderEdit = new((Order)DataGrid.SelectedItem, true);
             orderEdit.ShowDialog();
             if (!orderEdit.AddCancel) {
-                Database.Instance.UpdateOrder(orderEdit.order, orderEdit.order.OrderId);
-                updateTable();
+                if (orderEdit.Order.OrderStatus == Order.Status.Finished) {
+                    if (orderEdit.Order.Product.Quantity - orderEdit.Order.Quantity >= 0) {
+                        Database.Instance.DeleteOrder(orderEdit.Order.OrderId);
+                        Database.Instance.InsertFinishedOrder(orderEdit.Order);
+                        FinishOrder(orderEdit.Order);
+                    }
+                }
+                else {
+                    Database.Instance.UpdateOrder(orderEdit.Order, orderEdit.Order.OrderId);
+                }
+                UpdateTable();
             }
         }
-        private void Delete(object sender, RoutedEventArgs e) {
+        private void Delete(object? sender, RoutedEventArgs? e) {
             Order order = (Order)DataGrid.SelectedItem;
             if (MessageBox.Show($"Are you sure you want to delete {order}?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes) {
                 Database.Instance.DeleteOrder(order.OrderId);
-                updateTable();
+                UpdateTable();
             }
         }
     }

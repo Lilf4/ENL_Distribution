@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Employee" 
         d:DesignHeight="450" d:DesignWidth="800">
+        
     <Grid Background="White">
         <!--#region Grid Definitions-->
         <Grid.ColumnDefinitions>
@@ -30,7 +31,7 @@
         </Grid.RowDefinitions>
         <!--#endregion-->
         <Label Content="Product page" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0"></Label>
-        <DataGrid SelectionChanged="updateButtons" x:Name="DataGrid" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Grid.RowSpan="4" IsReadOnly="True"/>
+        <DataGrid SelectionChanged="UpdateButtons" x:Name="DataGrid" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Grid.RowSpan="4" IsReadOnly="True"/>
         <Button Click="NavBack" Grid.Column="0" Grid.Row="0" FontSize="20" Margin="10">Back</Button>
         <Button x:Name="AddBtn" Click="Add" Grid.Column="1" Grid.Row="6" FontSize="20">Add</Button>
         <Button x:Name="UpdateBtn" Click="Update" Grid.Column="3" Grid.Row="6" FontSize="20">Update</Button>

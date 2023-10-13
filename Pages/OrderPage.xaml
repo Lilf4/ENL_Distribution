@@ -29,7 +29,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Name="Title" Text="Order page" TextAlignment="Center" FontSize="30" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0"></TextBlock>
-        <DataGrid SelectionChanged="updateButtons" x:Name="DataGrid" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Grid.RowSpan="4" IsReadOnly="True"/>
+        <DataGrid SelectionChanged="UpdateButtons" x:Name="DataGrid" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Grid.RowSpan="4" IsReadOnly="True"/>
         <Button Click="NavBack" Grid.Column="0" Grid.Row="0" FontSize="20" Margin="10">Back</Button>
         <Button x:Name="AddBtn" Click="Add" Grid.Column="1" Grid.Row="6" FontSize="20">Add</Button>
         <Button x:Name="UpdateBtn" Click="Update" Grid.Column="3" Grid.Row="6" FontSize="20">Update</Button>
