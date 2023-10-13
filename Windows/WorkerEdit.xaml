@@ -30,16 +30,16 @@
         <TextBox TextWrapping="Wrap" Text="{Binding Path=Employee.EmployeeId, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" IsEnabled="False"/>
         
         <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">FirstName</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Employee.FirstName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+        <TextBox x:Name="FirstNameTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.FirstName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
 
         <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">LastName</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Employee.LastName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+        <TextBox x:Name="LastNameTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.LastName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">PhoneNumber</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
+        <TextBox x:Name="PhoneNumberTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Email</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Employee.Email, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
+        <TextBox x:Name="EmailTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.Email, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Title</Label>
         <ComboBox x:Name="TitleCombo" SelectedItem="{Binding Path=Employee.Title}" Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>

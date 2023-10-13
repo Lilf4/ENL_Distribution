@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,14 +22,14 @@ namespace ENF_Dist_Test.Windows {
 
         public bool AddCancel = true;
 
-        public Order order { get; set; }
+        private Order order { get; set; }
         public Order Order { 
             get {
                 return order;
             }
             set {
                 order = value;
-                OnPropertyChanged("Order");
+                OnPropertyChanged(nameof(Order));
             } 
         }
         protected void OnPropertyChanged(string propertyName) {
@@ -41,10 +42,21 @@ namespace ENF_Dist_Test.Windows {
             Order = order;
 
             EmployeeCombo.ItemsSource = Database.Instance.GetAllEmployees();
-            EmployeeCombo.SelectedIndex = 0;
+            for(int i = 0; i < EmployeeCombo.Items.Count; i++) {
+                if (((Employee)EmployeeCombo.Items[i]).EmployeeId == order.Employee.EmployeeId) {
+                    EmployeeCombo.SelectedIndex = i;
+                    break;
+                }
+            }
 
             ProductCombo.ItemsSource = Database.Instance.GetAllProducts();
-            ProductCombo.SelectedIndex = 0;
+            ProductCombo.SelectedValue = Order.Product;
+            for (int i = 0; i < ProductCombo.Items.Count; i++) {
+                if (((Product)ProductCombo.Items[i]).ProductId == order.Product.ProductId) {
+                    ProductCombo.SelectedIndex = i;
+                    break;
+                }
+            }
 
             StatusCombo.ItemsSource = Enum.GetValues(typeof(Order.Status)).Cast<Order.Status> ();
             StatusCombo.SelectedIndex = (int)Order.OrderStatus;

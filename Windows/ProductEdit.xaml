@@ -24,7 +24,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Name="Title"  Content="" HorizontalAlignment="Center" FontSize="30" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0"></Label>
+        <Label Name="Title"  Content="" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="0"></Label>
 
         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">ProductId</Label>
         <TextBox TextWrapping="Wrap" Text="{Binding Path=Product.ProductId, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" IsEnabled="False"/>
@@ -35,16 +35,18 @@
         <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Count</Label>
         <TextBox TextWrapping="Wrap" Text="{Binding Path=Product.Quantity, UpdateSourceTrigger=PropertyChanged}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
         
-        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Decription</Label>
+        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Description</Label>
         <TextBox TextWrapping="Wrap" Text="{Binding Path=Product.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Location Row</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Product.Location.Row, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
+        <TextBox x:Name="LocRow" TextWrapping="Wrap" TextChanged="Validate" Text="{Binding Path=Product.Location.Row, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Location Column</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Product.Location.Column, UpdateSourceTrigger=PropertyChanged}" Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
+        <TextBox x:Name="LocCol" TextWrapping="Wrap" TextChanged="Validate" Text="{Binding Path=Product.Location.Column, UpdateSourceTrigger=PropertyChanged}" Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
 
-        <Button Click="Finish" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Finish</Button>
+        <Label x:Name="ErrorTxt" Grid.Row="2" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="4" Margin="0, 80, 0, 90" HorizontalAlignment="Center"></Label>
+        
+        <Button x:Name="FinishBtn" Click="Finish" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Finish</Button>
         <Button Click="Cancel" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Cancel</Button>
     </Grid>
 </Window>

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ENF_Dist_Test.Windows"
+        xmlns:src="clr-namespace:ENF_Dist_Test"
         mc:Ignorable="d"
         x:Name="_window"
         Title="OrderEdit" Height="450" Width="800">
@@ -34,7 +34,7 @@
         <ComboBox x:Name="EmployeeCombo" SelectedItem="{Binding Path=Order.Employee}" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Product</Label>
-        <ComboBox x:Name="ProductCombo" SelectedItem="{Binding Path=Order.Product}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+        <ComboBox x:Name="ProductCombo" SelectedItem="{Binding Path=Order.Product}" DisplayMemberPath="NameQuanty" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
         
         <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Quantity</Label>
         <TextBox TextWrapping="Wrap" Text="{Binding Path=Order.Quantity, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 
@@ -18,7 +19,7 @@ namespace ENF_Dist_Test.Windows {
             }
             set {
                 employee = value;
-                OnPropertyChanged("Employee");
+                OnPropertyChanged(nameof(Employee));
             } 
         }
         protected void OnPropertyChanged(string propertyName) {
