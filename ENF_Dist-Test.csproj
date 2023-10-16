@@ -10,18 +10,30 @@
 
   <ItemGroup>
     <None Remove="config.json" />
+    <None Remove="Images\Logo.png" />
+    <None Remove="Images\Warehouse.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Warehouse.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="Material.Icons.WPF" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

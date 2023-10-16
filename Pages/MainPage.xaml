@@ -2,43 +2,100 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ENF_Dist_Test.Pages"
         mc:Ignorable="d"
         Title="MainPage"
-        d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            
-        </Grid.RowDefinitions>
+        d:DesignHeight="720" d:DesignWidth="1080">
+    
+    <Border Background="#eff2f7" CornerRadius="30">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--MENU-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
+                    <DockPanel>
+                        <!--Menu Logo-->
+                        <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
+                            <Ellipse>
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/Logo.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <!--<Label Content="WMS" FontSize="25" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>-->
+                        </Border>
+                        <!--Menu Items-->
+                        <Label Content="ENL Distribution" Foreground="White" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" HorizontalContentAlignment="Center" Margin="5 25 0 10"/>
+
+                        <Label Content="Odense, Denmark" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold" DockPanel.Dock="Top" HorizontalContentAlignment="Center"/>
+
+                        <!--Menu Seperator-->
+                        <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
+
+                        <!--Menu Buttons-->
+                        <StackPanel DockPanel.Dock="Top">
+                            <Button Click="NavProduct" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icons:MaterialIcon Kind="Warehouse" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Products"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Click="NavWorker" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icons:MaterialIcon Kind="Worker" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Employees"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Click="NavOrder" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icons:MaterialIcon Kind="PackageVariant" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Orders"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+
+                        <Button Click="NavExit" Style="{StaticResource menuButton}" 
+                                VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
+                            <StackPanel Orientation="Horizontal">
+                                <Icons:MaterialIcon Kind="Shutdown" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Exit"/>
+                            </StackPanel>
+                        </Button>
+
+                    </DockPanel>
+                </Border>
+            </Grid>
 
 
-        <Button Click="NavWorker" Height="100" Width="100" Grid.Column="1">Worker
-            <Button.ToolTip>
-                <ToolTip>
-                    Open worker page
-                </ToolTip>
-            </Button.ToolTip>
-        </Button>
+            <!--Main Section-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Images/Warehouse.jpg" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+            </Grid>
 
-        <Button Click="NavProduct" Height="100" Width="100" Grid.Column="0">Product
-            <Button.ToolTip>
-                <ToolTip>
-                    Open product page
-                </ToolTip>
-            </Button.ToolTip>
-        </Button>
-        <Button Click="NavOrder" Height="100" Width="100" Grid.Column="2">Order
-            <Button.ToolTip>
-                <ToolTip>
-                    Open order page
-                </ToolTip>
-            </Button.ToolTip>
-        </Button>
-    </Grid>
+
+
+        </Grid>
+    </Border>
 </Page>
