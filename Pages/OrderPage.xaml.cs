@@ -1,18 +1,7 @@
 ﻿using ENF_Dist_Test.Windows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ENF_Dist_Test.Pages {
     /// <summary>
@@ -29,7 +18,10 @@ namespace ENF_Dist_Test.Pages {
         }
 
         public void UpdateButtons(object? sender, RoutedEventArgs? e) {
+            UpdateBtn.Opacity = HasSelected ? 1 : 0.5;
             UpdateBtn.IsEnabled = HasSelected;
+            
+            DeleteBtn.Opacity = HasSelected ? 1 : 0.5;
             DeleteBtn.IsEnabled = HasSelected;
         }
 
@@ -86,7 +78,7 @@ namespace ENF_Dist_Test.Pages {
         }
         private void Delete(object? sender, RoutedEventArgs? e) {
             Order order = (Order)DataGrid.SelectedItem;
-            if (MessageBox.Show($"Are you sure you want to delete {order}?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes) {
+            if (new confirm("Delete", $"Are you sure you want to delete Order #{order.OrderId}\r\nOrder content: {order.Product} ({order.Quantity})").ShowDialog().Value) {
                 Database.Instance.DeleteOrder(order.OrderId);
                 UpdateTable();
             }

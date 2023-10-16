@@ -1,4 +1,6 @@
 using ENF_Dist_Test.Windows;
+using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,7 +16,10 @@ namespace ENF_Dist_Test.Pages{
             DataGrid.ItemsSource = Database.Instance.GetAllProducts();
         }
         public void UpdateButtons(object? sender, RoutedEventArgs? e) {
+            UpdateBtn.Opacity = HasSelected ? 1 : 0.5;
             UpdateBtn.IsEnabled = HasSelected;
+
+            DeleteBtn.Opacity = HasSelected ? 1 : 0.5;
             DeleteBtn.IsEnabled = HasSelected;
         }
 
@@ -52,9 +57,13 @@ namespace ENF_Dist_Test.Pages{
         }
         private void Delete(object sender, RoutedEventArgs e) {
             Product product = (Product)DataGrid.SelectedItem;
-            if (MessageBox.Show($"Are you sure you want to delete {product}?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes) {
-                Database.Instance.DeleteProduct(product.ProductId);
-                Database.Instance.DeleteLocation(product.Location.LocationId);
+            if (new confirm("Delete", $"Are you sure you want to delete {product}?").ShowDialog().Value) {
+                try {
+                    Database.Instance.DeleteProduct(product.ProductId);
+                    Database.Instance.DeleteLocation(product.Location.LocationId);
+                } catch(Exception ex) {
+                    new confirm("Error", "There is active orders referencing this product\r\nFinish/Delete orders to continue", false).ShowDialog();
+                }
                 UpdateTable();
             }
         }

@@ -1,7 +1,5 @@
 using ENF_Dist_Test.Windows;
 using System;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,7 +17,10 @@ namespace ENF_Dist_Test.Pages{
         }
 
         public void UpdateButtons(object? sender, RoutedEventArgs? e) {
+            UpdateBtn.Opacity = HasSelected ? 1 : 0.5;
             UpdateBtn.IsEnabled = HasSelected;
+
+            DeleteBtn.Opacity = HasSelected ? 1 : 0.5;
             DeleteBtn.IsEnabled = HasSelected;
         }
 
@@ -48,9 +49,13 @@ namespace ENF_Dist_Test.Pages{
         }
         private void Delete(object sender, RoutedEventArgs e) {
             Employee employee = (Employee)DataGrid.SelectedItem;
-            if(MessageBox.Show($"Are you sure you want to delete {employee}?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes) {
-                Database.Instance.DeleteEmployee(employee.EmployeeId);
-                UpdateTable();
+            if(new confirm("Delete", $"Are you sure you want to delete {employee}?").ShowDialog().Value) {
+                try {
+                    Database.Instance.DeleteEmployee(employee.EmployeeId);
+                } catch(Exception ex) {
+                    new confirm("Error", "There is active orders referencing employee\r\nFinish/Delete orders to continue", false).ShowDialog();
+                }
+            UpdateTable();
             }
         }
     }
