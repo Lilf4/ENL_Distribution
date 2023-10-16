@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Title="ProductEdit" Height="450" Width="800" AllowsTransparency="True" Background="Transparent">
 
-    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown" BorderBrush="#6741d9" BorderThickness="2">
+    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" BorderBrush="#6741d9" BorderThickness="2">
         <Grid DataContext="{Binding ElementName=_window}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"/>
@@ -39,16 +39,16 @@
             <Label Name="Title"  Content="" HorizontalAlignment="Center" FontSize="30" Grid.Column="3" Grid.ColumnSpan="5" Grid.Row="0" Grid.RowSpan="2" Margin="0 20 0 0"></Label>
             
             <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" FontSize="20" >Name</Label>
-            <TextBox TextWrapping="Wrap" VerticalContentAlignment="Center" Text="{Binding Path=Product.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Margin="10 0 10 20"/>
+            <TextBox TextWrapping="Wrap" VerticalContentAlignment="Center" TextChanged="Validate" Text="{Binding Path=Product.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Margin="10 0 10 20"/>
             
             <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" FontSize="20">Id</Label>
             <TextBox TextWrapping="Wrap" VerticalContentAlignment="Center" Text="{Binding Path=Product.ProductId, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Margin="10 0 10 20" IsEnabled="False"/>
 
             <Label Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" FontSize="20">Quantity</Label>
-            <TextBox TextWrapping="Wrap" VerticalContentAlignment="Center" Text="{Binding Path=Product.Quantity, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2" Margin="10 0 10 20"/>
+            <TextBox TextWrapping="Wrap" VerticalContentAlignment="Center" TextChanged="Validate" Text="{Binding Path=Product.Quantity, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2" Margin="10 0 10 20"/>
         
             <Label Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="4" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" FontSize="20">Description</Label>
-            <TextBox TextWrapping="Wrap" VerticalContentAlignment="Top" Text="{Binding Path=Product.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="6" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="4" Margin="10 0 10 20"/>
+            <TextBox TextWrapping="Wrap" VerticalContentAlignment="Top" TextChanged="Validate" Text="{Binding Path=Product.Description, UpdateSourceTrigger=PropertyChanged}" Grid.Column="6" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="4" Margin="10 0 10 20"/>
 
             <Label Content="Location" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="13" Margin="0 20 0 0"/>
             

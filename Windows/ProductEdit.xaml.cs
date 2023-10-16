@@ -1,18 +1,10 @@
-﻿using System;
+﻿using ENF_Dist_Test.Validators;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Printing;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Input;
 
 namespace ENF_Dist_Test.Windows {
     /// <summary>
@@ -63,26 +55,7 @@ namespace ENF_Dist_Test.Windows {
         public void Cancel(object sender, RoutedEventArgs e) {
             this.Close();
         }
-
-        private void Validate(object sender, TextChangedEventArgs e) {
-            string result = "";
-            bool canFinish = true;
-
-            if (locations.Contains(product.Location.LocationId) && product.Location.LocationId != oldLoc) {
-                LocCol.BorderBrush = Brushes.Red;
-                LocRow.BorderBrush = Brushes.Red;
-
-                result += "Location is already used\r\n";
-                canFinish = false;
-            }
-            else {
-                LocCol.BorderBrush = Brushes.LightGray;
-                LocRow.BorderBrush = Brushes.LightGray;
-            }
-
-            FinishBtn.IsEnabled = canFinish;
-            ErrorTxt.Content = result;
-        }
+        
 
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -92,26 +65,33 @@ namespace ENF_Dist_Test.Windows {
                 this.DragMove();
             }
         }
-        private bool IsMaximized = false;
+        
+        private void Validate(object sender, TextChangedEventArgs e) {
+            string result = "";
+            bool canFinish = true;
 
-        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                if (IsMaximized)
-                {
-                    this.WindowState = WindowState.Normal;
-                    this.Width = 1080;
-                    this.Height = 720;
+            if (locations.Contains(Product.Location.LocationId) && Product.Location.LocationId != oldLoc) {
+                LocCol.BorderBrush = Brushes.Red;
+                LocRow.BorderBrush = Brushes.Red;
 
-                    IsMaximized = false;
-                }
-                else
-                {
-                    this.WindowState = WindowState.Maximized;
-                    IsMaximized = true;
-                }
+                result += "Location is already used. ";
+                canFinish = false;
             }
+            else {
+                LocCol.BorderBrush = Brushes.LightGray;
+                LocRow.BorderBrush = Brushes.LightGray;
+            }
+
+            FluentValidation.Results.ValidationResult res = new ProductValidator().Validate(Product);
+
+            if (!res.IsValid) {
+                canFinish = false;
+            }
+            result += res.ToString(",");
+
+            FinishBtn.Opacity = canFinish ? 1 : 0.5;
+            FinishBtn.IsEnabled = canFinish;
+            ErrorTxt.Content = result;
         }
     }
 }

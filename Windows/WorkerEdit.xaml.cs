@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ENF_Dist_Test.Validators;
+using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace ENF_Dist_Test.Windows {
     /// <summary>
@@ -45,33 +46,31 @@ namespace ENF_Dist_Test.Windows {
         public void Cancel(object sender, RoutedEventArgs e) {
             this.Close();
         }
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e) {
+            if (e.ChangedButton == MouseButton.Left) {
                 this.DragMove();
             }
         }
-        private bool IsMaximized = false;
+        
+        private void Validate(object sender, SelectionChangedEventArgs e) {
+            Validate(new(), new TextChangedEventArgs(e.RoutedEvent, UndoAction.Undo));
+        }
 
-        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                if (IsMaximized)
-                {
-                    this.WindowState = WindowState.Normal;
-                    this.Width = 1080;
-                    this.Height = 720;
+        private void Validate(object sender, TextChangedEventArgs e) {
+            string result = "";
+            bool canFinish = true;
 
-                    IsMaximized = false;
-                }
-                else
-                {
-                    this.WindowState = WindowState.Maximized;
-                    IsMaximized = true;
-                }
+            FluentValidation.Results.ValidationResult res = new EmployeeValidator().Validate(Employee);
+
+            if (!res.IsValid) {
+                canFinish = false;
             }
+            result += res.ToString(",");
+
+            FinishBtn.Opacity = canFinish ? 1 : 0.5;
+            FinishBtn.IsEnabled = canFinish;
+            ErrorTxt.Content = result;
         }
     }
 }

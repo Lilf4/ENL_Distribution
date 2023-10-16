@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ENF_Dist_Test.Validators;
+using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ENF_Dist_Test.Windows {
     /// <summary>
@@ -42,19 +34,22 @@ namespace ENF_Dist_Test.Windows {
             Order = order;
 
             EmployeeCombo.ItemsSource = Database.Instance.GetAllEmployees();
-            for(int i = 0; i < EmployeeCombo.Items.Count; i++) {
-                if (((Employee)EmployeeCombo.Items[i]).EmployeeId == order.Employee.EmployeeId) {
-                    EmployeeCombo.SelectedIndex = i;
-                    break;
+            if(order.Employee != null) {
+                for(int i = 0; i < EmployeeCombo.Items.Count; i++) {
+                    if (((Employee)EmployeeCombo.Items[i]).EmployeeId == order.Employee.EmployeeId) {
+                        EmployeeCombo.SelectedIndex = i;
+                        break;
+                    }
                 }
             }
 
             ProductCombo.ItemsSource = Database.Instance.GetAllProducts();
-            ProductCombo.SelectedValue = Order.Product;
-            for (int i = 0; i < ProductCombo.Items.Count; i++) {
-                if (((Product)ProductCombo.Items[i]).ProductId == order.Product.ProductId) {
-                    ProductCombo.SelectedIndex = i;
-                    break;
+            if (order.Product != null) {
+                for (int i = 0; i < ProductCombo.Items.Count; i++) {
+                    if (((Product)ProductCombo.Items[i]).ProductId == order.Product.ProductId) {
+                        ProductCombo.SelectedIndex = i;
+                        break;
+                    }
                 }
             }
 
@@ -79,26 +74,31 @@ namespace ENF_Dist_Test.Windows {
                 this.DragMove();
             }
         }
-        private bool IsMaximized = false;
+        
+        private void Validate(object sender, SelectionChangedEventArgs e) {
+            Validate(new(), new TextChangedEventArgs(e.RoutedEvent, UndoAction.Undo));
+        }
 
-        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                if (IsMaximized)
-                {
-                    this.WindowState = WindowState.Normal;
-                    this.Width = 1080;
-                    this.Height = 720;
+        private void Validate(object sender, TextChangedEventArgs e) {
+            string result = "";
+            bool canFinish = true;
 
-                    IsMaximized = false;
-                }
-                else
-                {
-                    this.WindowState = WindowState.Maximized;
-                    IsMaximized = true;
-                }
+            if(order.OrderStatus == Order.Status.Finished && order.Quantity > order.Product.Quantity) {
+                result += $"There's not enough {order.Product} to finish order,";
+                canFinish = false;
             }
+
+
+            FluentValidation.Results.ValidationResult res = new OrderValidator().Validate(Order);
+
+            if (!res.IsValid) {
+                canFinish = false;
+            }
+            result += res.ToString(",");
+
+            FinishBtn.Opacity = canFinish ? 1 : 0.5;
+            FinishBtn.IsEnabled = canFinish;
+            ErrorTxt.Content = result;
         }
     }
 }
