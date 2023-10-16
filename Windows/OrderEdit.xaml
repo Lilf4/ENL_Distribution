@@ -6,43 +6,46 @@
         xmlns:src="clr-namespace:ENF_Dist_Test"
         mc:Ignorable="d"
         x:Name="_window"
-        Title="OrderEdit" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="OrderEdit" Height="450" Width="800" AllowsTransparency="True" Background="Transparent">
 
-    <Grid DataContext="{Binding ElementName=_window}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Label Name="Title"  Content="" HorizontalAlignment="Center" FontSize="30" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0"></Label>
+    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown" BorderBrush="#6741d9" BorderThickness="2">
+        <Grid DataContext="{Binding ElementName=_window}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Name="Title"  Content="" HorizontalAlignment="Center" FontSize="30" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0"></Label>
 
-        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">OrderId</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Order.OrderId}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" IsEnabled="False"/>
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">OrderId</Label>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=Order.OrderId}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" IsEnabled="False" VerticalContentAlignment="Center"/>
 
-        <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Employee</Label>
-        <ComboBox x:Name="EmployeeCombo" SelectedItem="{Binding Path=Order.Employee}" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+            <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Employee</Label>
+            <ComboBox x:Name="EmployeeCombo" SelectedItem="{Binding Path=Order.Employee}" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" VerticalContentAlignment="Center"/>
         
-        <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Product</Label>
-        <ComboBox x:Name="ProductCombo" SelectedItem="{Binding Path=Order.Product}" DisplayMemberPath="NameQuanty" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+            <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Product</Label>
+            <ComboBox x:Name="ProductCombo" SelectedItem="{Binding Path=Order.Product}" DisplayMemberPath="NameQuanty" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" VerticalContentAlignment="Center"/>
         
-        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Quantity</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Order.Quantity, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
+            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Quantity</Label>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=Order.Quantity, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40" VerticalContentAlignment="Center"/>
         
-        <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Status</Label>
-        <ComboBox x:Name="StatusCombo" SelectedItem="{Binding Path=Order.OrderStatus}" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
+            <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Status</Label>
+            <ComboBox x:Name="StatusCombo" SelectedItem="{Binding Path=Order.OrderStatus}" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="40" VerticalContentAlignment="Center"/>
 
-        <Button Click="Finish" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Finish</Button>
-        <Button Click="Cancel" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Cancel</Button>
-    </Grid>
+            <Button Style="{StaticResource addButton}" Click="Finish" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Finish</Button>
+            <Button Style="{StaticResource deleteButton}" Click="Cancel" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Cancel</Button>
+        </Grid>
+    </Border>
 </Window>

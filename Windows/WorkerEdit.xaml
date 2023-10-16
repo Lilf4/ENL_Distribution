@@ -6,45 +6,49 @@
         xmlns:local="clr-namespace:ENF_Dist_Test.Windows"
         mc:Ignorable="d"
         x:Name="_window"
-        Title="WorkerEdit" Height="450" Width="800">
-    <Grid DataContext="{Binding ElementName=_window}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Label Name="Title"  Content="" HorizontalAlignment="Center" FontSize="30" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0"></Label>
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="WorkerEdit" Height="450" Width="800"  AllowsTransparency="True" Background="Transparent">
+    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown" BorderBrush="#6741d9" BorderThickness="2">
+        <Grid DataContext="{Binding ElementName=_window}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Name="Title"  Content="" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="0"></Label>
 
-        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">EmployeeId</Label>
-        <TextBox TextWrapping="Wrap" Text="{Binding Path=Employee.EmployeeId, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" IsEnabled="False"/>
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Id</Label>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=Employee.EmployeeId, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" IsEnabled="False" VerticalContentAlignment="Center"/>
         
-        <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">FirstName</Label>
-        <TextBox x:Name="FirstNameTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.FirstName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+            <Label Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">First Name</Label>
+            <TextBox x:Name="FirstNameTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.FirstName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" VerticalContentAlignment="Center"/>
 
-        <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">LastName</Label>
-        <TextBox x:Name="LastNameTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.LastName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40"/>
+            <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Last Name</Label>
+            <TextBox x:Name="LastNameTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.LastName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Margin="40" VerticalContentAlignment="Center"/>
         
-        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">PhoneNumber</Label>
-        <TextBox x:Name="PhoneNumberTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
+            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Phone Number</Label>
+            <TextBox x:Name="PhoneNumberTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="40" VerticalContentAlignment="Center"/>
         
-        <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Email</Label>
-        <TextBox x:Name="EmailTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.Email, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
-        
-        <Label Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Title</Label>
-        <ComboBox x:Name="TitleCombo" SelectedItem="{Binding Path=Employee.Title}" Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="2" Margin="40"/>
+            <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Email</Label>
+            <TextBox x:Name="EmailTxt" TextWrapping="Wrap" Text="{Binding Path=Employee.Email, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="40" VerticalContentAlignment="Center"/>
 
-        <Button Click="Finish" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Finish</Button>
-        <Button Click="Cancel" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Cancel</Button>
-    </Grid>
+            <Label Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20">Role</Label>
+            <ComboBox x:Name="TitleCombo" SelectedItem="{Binding Path=Employee.Title}" Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="2" Margin="40" VerticalContentAlignment="Center"/>
+
+            <Button Click="Finish" Style="{StaticResource addButton}" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Finish</Button>
+            <Button Click="Cancel" Style="{StaticResource deleteButton}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" FontSize="20" Margin="20">Cancel</Button>
+        </Grid>
+    </Border>
+
 </Window>

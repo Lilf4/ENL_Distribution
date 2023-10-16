@@ -18,5 +18,9 @@ namespace ENF_Dist_Test.Pages{
         private void NavOrder(object sender, RoutedEventArgs e) {
             NavigationService.Navigate(new OrderPage());
         }
+        private void NavExit(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
