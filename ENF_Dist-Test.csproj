@@ -10,7 +10,9 @@
 
   <ItemGroup>
     <None Remove="config.json" />
+    <None Remove="Images\Logo.ico" />
     <None Remove="Images\Logo.png" />
+    <None Remove="Images\Logo160.png" />
     <None Remove="Images\Warehouse.jpg" />
   </ItemGroup>
 
@@ -31,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\Logo.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
