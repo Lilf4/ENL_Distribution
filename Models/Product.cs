@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace ENF_Dist_Test
 {
     public class Product{
