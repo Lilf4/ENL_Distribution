@@ -53,11 +53,11 @@ I have split the project into 4 directories
 [<img src="https://github.com/Dagor94.png" width="80px;" style="border-radius: 40px;"/>](https://github.com/Dagor94)
 
 <div style="display: flex; flex-direction: row;">
-	<a style="margin-left: 10px" href="https://github.com/Dagor94">Dagor94</a>
-	<p style="margin-left: 5px">- Contribution:
+<a style="margin-left: 10px" href="https://github.com/Dagor94">Dagor94</a>
+<p style="margin-left: 5px; padding-right: 5px">- Contribution:</p>
 	
-[<p style="margin-left: 10px">Design and styling of pages/windows.</p>](https://github.com/Dagor94/ENL_Distribution)
-</p>
+[Design and styling of pages/windows.](https://github.com/Dagor94/ENL_Distribution)
+
 </div>
 
 </div>
