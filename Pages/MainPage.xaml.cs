@@ -9,8 +9,8 @@ namespace ENF_Dist_Test.Pages{
             Database.Instance.Equals(new object());
         }
 
-        private void NavWorker(object sender, RoutedEventArgs e){
-            NavigationService.Navigate(new WorkerPage());
+        private void NavEmployee(object sender, RoutedEventArgs e){
+            NavigationService.Navigate(new EmployeePage());
         }
         private void NavProduct(object sender, RoutedEventArgs e){
             NavigationService.Navigate(new ProductPage());

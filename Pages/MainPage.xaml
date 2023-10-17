@@ -51,7 +51,7 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Click="NavWorker" Style="{StaticResource menuButton}">
+                            <Button Click="NavEmployee" Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icons:MaterialIcon Kind="Worker" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Employees"/>
