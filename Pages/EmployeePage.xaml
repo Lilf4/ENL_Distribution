@@ -1,0 +1,85 @@
+<Page x:Class="ENF_Dist_Test.Pages.EmployeePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Icons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ENF_Dist_Test.Pages"
+        mc:Ignorable="d"
+        d:DesignHeight="450" d:DesignWidth="800"
+        x:Name="_window"
+      >
+    <Border Background="#eff2f7" CornerRadius="30">
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!--Page Title-->
+                <Label Content="Employees" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
+
+                <!--Add Button-->
+                <Button x:Name="AddBtn" Click="Add" Style="{StaticResource addButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Icons:MaterialIcon Kind="Plus" VerticalAlignment="Center" Width="18" Height="18" Margin="0 1 8 0"/>
+                        <TextBlock Text="Add A New Employee" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+
+                <!--Update Button-->
+                <Button x:Name="UpdateBtn" Click="Update" Style="{StaticResource updateButton}" Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Icons:MaterialIcon Kind="Pencil" VerticalAlignment="Center" Width="18" Height="18" Margin="0 1 8 0"/>
+                        <TextBlock Text="Update An Employee" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+
+                <!--Delete Button-->
+                <Button x:Name="DeleteBtn" Click="Delete" Style="{StaticResource deleteButton}" Grid.Column="2">
+                    <StackPanel Orientation="Horizontal">
+                        <Icons:MaterialIcon Kind="TrashCan" VerticalAlignment="Center" Width="18" Height="18" Margin="0 1 8 0"/>
+                        <TextBlock Text="Remove An Employee" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+
+                <!--Seperator-->
+                <Separator Height="1" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Background="#dae2ea" Margin="0 -1 0 10"/>
+
+                <!--DataGrid-->
+                <DataGrid SelectionChanged="UpdateButtons" Grid.ColumnSpan="3" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="DataGrid" Margin="10 15 10 10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" IsReadOnly="True" CanUserResize="False" Width="0.25*"/>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" IsReadOnly="True" CanUserResize="False" Width="0.5*"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" IsReadOnly="True" CanUserResize="False" Width="0.5*"/>
+                        <DataGridTextColumn Header="Phone" Binding="{Binding PhoneNumber}" IsReadOnly="True" CanUserResize="False" Width="0.5*"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True" CanUserResize="False" Width="0.75*"/>
+                        <DataGridTextColumn Header="Role" Binding="{Binding Title}" IsReadOnly="True" CanUserResize="False" Width="0.5*"/>
+                        <DataGridTextColumn Header="Completed Orders" Binding="{Binding CompletedOrders}" IsReadOnly="True" CanUserResize="False" Width="0.5*"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+                <!--Back Button-->
+                <Button Click="NavBack" Style="{StaticResource backButton}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="12 2 0 0" VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Horizontal">
+                        <Icons:MaterialIcon Kind="Backburger" VerticalAlignment="Center" Width="18" Height="18" Margin="0 1 8 0"/>
+                        <TextBlock Text="Back"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>
