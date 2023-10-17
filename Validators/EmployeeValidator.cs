@@ -8,7 +8,6 @@ namespace ENF_Dist_Test.Validators {
             RuleFor(employee => employee.LastName).NotEmpty();
             RuleFor(employee => employee.PhoneNumber).Must(BeAValidPhoneNumber).WithMessage("Please specify a valid danish phoneNumber");
             RuleFor(employee => employee.Email).EmailAddress();
-
         }
 
         private bool BeAValidPhoneNumber(string phoneNumber) {

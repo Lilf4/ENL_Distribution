@@ -7,7 +7,7 @@ namespace ENF_Dist_Test.Validators {
             RuleFor(product => product.Name).NotEmpty();
             RuleFor(product => product.Description).NotEmpty();
             RuleFor(product => product.Quantity).GreaterThanOrEqualTo(0);
-
+            RuleFor(product => product.Location).NotNull();
         }
     }
 }
