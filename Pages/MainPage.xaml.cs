@@ -6,6 +6,7 @@ namespace ENF_Dist_Test.Pages{
 
         public MainPage(){
             InitializeComponent();
+            Database.Instance.Equals(new object());
         }
 
         private void NavWorker(object sender, RoutedEventArgs e){

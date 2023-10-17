@@ -93,9 +93,6 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="/Images/Warehouse.jpg" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
             </Grid>
-
-
-
         </Grid>
     </Border>
 </Page>
