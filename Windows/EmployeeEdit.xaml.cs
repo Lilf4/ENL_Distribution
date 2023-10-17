@@ -10,7 +10,7 @@ namespace ENF_Dist_Test.Windows {
     /// <summary>
     /// Interaction logic for ProductEdit.xaml
     /// </summary>
-    public partial class WorkerEdit : Window, INotifyPropertyChanged {
+    public partial class EmployeeEdit : Window, INotifyPropertyChanged {
 
         public bool AddCancel = true;
 
@@ -28,7 +28,7 @@ namespace ENF_Dist_Test.Windows {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public WorkerEdit(Employee employee, bool AddEdit) {
+        public EmployeeEdit(Employee employee, bool AddEdit) {
             InitializeComponent();
             Title.Content = AddEdit ? "Edit Employee" : "Add Employee";
             Employee = employee;
