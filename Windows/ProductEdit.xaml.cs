@@ -34,7 +34,11 @@ namespace ENF_Dist_Test.Windows {
         public ProductEdit(Product product, bool AddEdit) {
             InitializeComponent();
 
-            oldLoc = product.Location.LocationId;
+            if(product.Location != null) {
+                oldLoc = product.Location.LocationId;
+            }else {
+                product.Location = new();
+            }
 
             ErrorTxt.Foreground = Brushes.Red;
 
