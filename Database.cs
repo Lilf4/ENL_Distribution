@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
+using System.Windows;
+using ENF_Dist_Test.Windows;
 using Newtonsoft.Json;
 
 namespace ENF_Dist_Test {
@@ -20,10 +22,22 @@ namespace ENF_Dist_Test {
         }
 
         public Database() {
+            if (!File.Exists("config.json")) {
+                File.WriteAllText("config.json", JsonConvert.SerializeObject(new config(), Formatting.Indented));
+                invalidConfig("Config file wasn't found a new one has been created\r\n please fill it before running again.");
+            }
             string configData = File.ReadAllText("config.json");
             if(configData != null) {
                 config = JsonConvert.DeserializeObject<config>(configData);
             }
+            if(string.IsNullOrEmpty(config.dataSource) || string.IsNullOrEmpty(config.UserID) || string.IsNullOrWhiteSpace(config.dataBase) || string.IsNullOrWhiteSpace(config.password)) {
+                invalidConfig("Not all required configs has been set,\r\n please set them before running again.");
+            }
+        }
+
+        private void invalidConfig(string msg) {
+            new confirm("Invalid Config", msg, false).ShowDialog();
+            Application.Current.Shutdown();
         }
 
         public int GetNextID(string table) {
