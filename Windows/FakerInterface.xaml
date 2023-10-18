@@ -1,0 +1,61 @@
+﻿<Window x:Class="ENF_Dist_Test.Windows.FakerInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ENF_Dist_Test.Windows"
+        mc:Ignorable="d"
+         x:Name="_window"
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="OrderEdit" Height="300" Width="600" AllowsTransparency="True" Background="Transparent">
+    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" BorderBrush="#6741d9" BorderThickness="2">
+        <Grid DataContext="{Binding ElementName=_window}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="1.2*"/>
+            </Grid.RowDefinitions>
+            <Label Name="Title"  Content="Data Settings" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="0" Grid.ColumnSpan="9" Grid.Row="0"></Label>
+
+            <Label Content="Min Products" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding GenerateInfo.minProducts}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" FontSize="20" Margin="10"></TextBox>
+
+            <Label Content="Max Products" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding GenerateInfo.maxProducts}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" FontSize="20" Margin="10"></TextBox>
+
+            <Label Content="Max Prod Quantity" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding GenerateInfo.maxProdQuantity}" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" FontSize="20" Margin="10"></TextBox>
+
+            <Label Content="Min Employees" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding GenerateInfo.minEmployees}" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2" FontSize="20" Margin="10"></TextBox>
+
+            <Label Content="Max Employees" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding GenerateInfo.maxEmployees}" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1" FontSize="20" Margin="10"></TextBox>
+
+            <Label Content="Min Orders Per" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding GenerateInfo.minOrdPerEmployee}" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="2" FontSize="20" Margin="10"></TextBox>
+
+            <Label Content="Max Orders Per" Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding GenerateInfo.maxOrdPerEmployee}" Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="1" FontSize="20" Margin="10"></TextBox>
+
+            <Label Content="Max Order Quantity" Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding GenerateInfo.maxOrdQuantity}" Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="2" FontSize="20" Margin="10"></TextBox>
+
+            <Button x:Name="CancelBtn" Style="{StaticResource deleteButton}" Click="CancelBtn_Click" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3" FontSize="20" Margin="0" HorizontalAlignment="Center">Cancel</Button>
+            <Button x:Name="FinishBtn" Style="{StaticResource addButton}" Click="FinishBtn_Click" Grid.Column="6" Grid.ColumnSpan="4" Grid.Row="3" FontSize="20" Margin="0" HorizontalAlignment="Center">Continue</Button>
+        </Grid>
+    </Border>
+</Window>
