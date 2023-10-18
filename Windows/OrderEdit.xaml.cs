@@ -7,9 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ENF_Dist_Test.Windows {
-    /// <summary>
-    /// Interaction logic for ProductEdit.xaml
-    /// </summary>
     public partial class OrderEdit : Window, INotifyPropertyChanged {
 
         public bool AddCancel = true;

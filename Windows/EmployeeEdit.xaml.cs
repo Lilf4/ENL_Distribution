@@ -7,9 +7,6 @@ using System.Windows.Input;
 using System.Windows.Controls;
 
 namespace ENF_Dist_Test.Windows {
-    /// <summary>
-    /// Interaction logic for ProductEdit.xaml
-    /// </summary>
     public partial class EmployeeEdit : Window, INotifyPropertyChanged {
 
         public bool AddCancel = true;

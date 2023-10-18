@@ -2,9 +2,6 @@
 using System.Windows.Input;
 
 namespace ENF_Dist_Test.Windows {
-    /// <summary>
-    /// Interaction logic for confirm.xaml
-    /// </summary>
     public partial class confirm : Window {
 
         public confirm(string title = "Are you sure?", string description = "", bool ConfirmOk = true) {

@@ -4,9 +4,6 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace ENF_Dist_Test.Pages {
-    /// <summary>
-    /// Interaction logic for Order.xaml
-    /// </summary>
     public partial class OrderPage : Page {
         public OrderPage() {
             InitializeComponent();
