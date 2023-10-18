@@ -23,7 +23,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
+                <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 26">
                     <DockPanel>
                         <!--Menu Logo-->
                         <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
@@ -64,6 +64,13 @@
                                     <TextBlock Text="Orders"/>
                                 </StackPanel>
                             </Button>
+                            
+                            <Button Click="RecreateDB" Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icons:MaterialIcon Kind="DatabaseCog" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Recreate DB"/>
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
 
                         <Button Click="NavExit" Style="{StaticResource menuButton}" 
@@ -73,7 +80,6 @@
                                 <TextBlock Text="Exit"/>
                             </StackPanel>
                         </Button>
-
                     </DockPanel>
                 </Border>
             </Grid>
