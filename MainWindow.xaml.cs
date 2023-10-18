@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using ENF_Dist_Test.Validators;
+using ENF_Dist_Test.Windows;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ENF_Dist_Test

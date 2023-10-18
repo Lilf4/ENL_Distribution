@@ -35,6 +35,16 @@ namespace ENF_Dist_Test {
             }
         }
 
+        public void RebuildDatabase() {
+            string sql = $"DROP TABLE FinishedOrders;\r\n" +
+                         $"DROP TABLE Orders;\r\n" +
+                         $"DROP TABLE Products;\r\n" +
+                         $"DROP TABLE Locations;\r\n" +
+                         $"DROP TABLE Employees;\r\n" +
+                         $"CREATE TABLE Employees(EmployeeId INT PRIMARY KEY IDENTITY(1,1),\r\nCompletedOrders INT,\r\nFirstName VARCHAR(64),\r\nLastName VARCHAR(64),\r\nPhoneNumber VARCHAR(16),\r\nEmail VARCHAR(128),\r\nTitle TINYINT\r\n)\r\n\r\nCREATE TABLE Locations(\r\nLocationId VARCHAR(9) PRIMARY KEY,\r\n[Row] INT,\r\n[Column] INT\r\n)\r\n\r\nCREATE TABLE Products(\r\nProductId INT PRIMARY KEY IDENTITY(1,1),\r\n[Name] VARCHAR(64),\r\nQuantity INT,\r\n[Description] TEXT,\r\nLocationId VARCHAR(9) FOREIGN KEY REFERENCES Locations(LocationId)\r\n)\r\n\r\nCREATE TABLE Orders(\r\nOrderId INT PRIMARY KEY IDENTITY(1,1),\r\nEmployeeId INT FOREIGN KEY REFERENCES Employees(EmployeeId),\r\nProductId INT FOREIGN KEY REFERENCES Products(ProductId),\r\nQuantity INT,\r\nOrderStatus TINYINT\r\n)\r\n\r\nCREATE TABLE FinishedOrders(\r\nOrderId INT,\r\nEmployeeFirstName VARCHAR(64),\r\nEmployeeLastName VARCHAR(64),\r\nProduct VARCHAR(64),\r\nQuantity INT,\r\nOrderStatus TINYINT\r\n)";
+            execute(sql);
+        }
+
         private void invalidConfig(string msg) {
             new confirm("Invalid Config", msg, false).ShowDialog();
             Application.Current.Shutdown();
@@ -79,7 +89,27 @@ namespace ENF_Dist_Test {
                 return result;
             }
         }
+        private int queryInt(string sql) {
+            SqlDataReader reader;
+            using (SqlConnection connection = getConnection()) {
+                connection.Open();
 
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = sql;
+
+                reader = command.ExecuteReader();
+
+                int result = -1;
+
+                while (reader.Read()) {
+                    result = reader.GetInt32(0);
+                }
+
+                connection.Close();
+
+                return result;
+            }
+        }
 
         #region Location
         List<Location> LocationQuery(string sql) {
@@ -117,6 +147,7 @@ namespace ENF_Dist_Test {
         }
         public int InsertLocation(Location Location) {
             string SQL = $"INSERT INTO Locations (LocationId, [Row], [Column])\r\n" +
+                $"OUTPUT INSERTED.LocationId\r\n" +
                 $"VALUES ('{Location.LocationId}', {Location.Row}, {Location.Column})";
             return execute(SQL);
         }
@@ -165,8 +196,9 @@ namespace ENF_Dist_Test {
         }
         public int InsertProduct(Product Product) {
             string SQL = $"INSERT INTO Products (Name, Quantity, Description, LocationId)\r\n" +
+                $"OUTPUT INSERTED.ProductId\r\n" +
                 $"VALUES ('{Product.Name}', {Product.Quantity}, '{Product.Description}', '{Product.Location.LocationId}')";
-            return execute(SQL);
+            return queryInt(SQL);
         }
         public int UpdateProduct(Product Product, int ProductId) {
             string SQL = $"UPDATE Products\r\n" +
@@ -222,8 +254,9 @@ namespace ENF_Dist_Test {
         }
         public int InsertEmployee(Employee Employee) {
             string SQL = $"INSERT INTO Employees (FirstName, LastName, PhoneNumber, Email, Title, CompletedOrders)\r\n" +
+                $"OUTPUT INSERTED.EmployeeId\r\n" +
                 $"VALUES ('{Employee.FirstName}', '{Employee.LastName}', '{Employee.PhoneNumber}', '{Employee.Email}', {(byte)Employee.Title} ,{Employee.CompletedOrders})";
-            return execute(SQL);
+            return queryInt(SQL);
         }
         public int UpdateEmployee(Employee Employee, int EmployeeId) {
             string SQL = $"UPDATE Employees\r\n" +
@@ -308,13 +341,15 @@ namespace ENF_Dist_Test {
         }
         public int InsertOrder(Order Order) {
             string SQL = $"INSERT INTO Orders (EmployeeId, ProductId, Quantity, OrderStatus)\r\n" +
+                $"OUTPUT INSERTED.OrderId\r\n" +
                 $"VALUES ({Order.Employee.EmployeeId}, {Order.Product.ProductId}, {Order.Quantity}, {(byte)Order.OrderStatus})";
-            return execute(SQL);
+            return queryInt(SQL);
         }
         public int InsertFinishedOrder(Order Order) {
             string SQL = $"INSERT INTO FinishedOrders (OrderId, EmployeeFirstName, EmployeeLastName, Product, Quantity, OrderStatus)\r\n" +
+                $"OUTPUT INSERTED.OrderId\r\n" +
                 $"VALUES ({Order.OrderId}, '{Order.Employee.FirstName}', '{Order.Employee.LastName}', '{Order.Product.Name}', {Order.Quantity}, {(byte)Order.OrderStatus})";
-            return execute(SQL);
+            return queryInt(SQL);
         }
         public int UpdateOrder(Order Order, int OrderId) {
             string SQL = $"UPDATE Orders\r\n" +
