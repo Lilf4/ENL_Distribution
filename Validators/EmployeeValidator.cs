@@ -11,7 +11,7 @@ namespace ENF_Dist_Test.Validators {
         }
 
         private bool BeAValidPhoneNumber(string phoneNumber) {
-            Regex rx = new("^(?:(?:00|\\+)?45)?(?=2|3[01]|4[012]|4911|5[0-3]|6[01]|[78]1|9[123])\\d{8}$");
+            Regex rx = new("((^\\d{8})|(^\\d{2}[ ]\\d{2}[ ]\\d{2}[ ]\\d{2})|(^\\d{4}[ ]\\d{4}))$");
             return rx.Match(phoneNumber).Success;
         }
     }
