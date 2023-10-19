@@ -8,7 +8,7 @@ namespace ENF_Dist_Test.Pages{
 
         public MainPage(){
             InitializeComponent();
-            Database.Instance.Equals(new object());
+            RecreateDBBtn.Visibility = Database.Instance.devState ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void NavEmployee(object sender, RoutedEventArgs e){

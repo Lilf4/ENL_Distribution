@@ -65,7 +65,7 @@
                                 </StackPanel>
                             </Button>
                             
-                            <Button Click="RecreateDB" Style="{StaticResource menuButton}">
+                            <Button x:Name="RecreateDBBtn" Click="RecreateDB" Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icons:MaterialIcon Kind="DatabaseCog" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Recreate DB"/>
