@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 namespace ENF_Dist_Test {
     public class Database {
         private config config;
+        public bool devState { get { return config.dev; } }
+
         public static readonly Database Instance = new();
 
         private SqlConnection getConnection() {

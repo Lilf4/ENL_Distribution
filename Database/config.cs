@@ -4,5 +4,6 @@
         public string dataBase { get; set; } = string.Empty;
         public string UserID { get; set; } = string.Empty;
         public string password { get; set; } = string.Empty;
+        public bool dev { get; set; } = false;
     }
 }
