@@ -44,6 +44,9 @@ I have split the project into 4 directories
 ## Dependencies
 - [**FluentValidation**](https://docs.fluentvalidation.net/): Library for easily creating validation methods for whole classes. By Jeremy Skinner
 - [**Material.Icons.WPF**](https://github.com/SKProCH/Material.Icons/): Library of icons for use in WPF applications. By SKProCH
+- [**Bogus**](https://github.com/bchavez/Bogus): Library for easily creating dummy data. By Brian Chavez
+- [**FARE**](https://github.com/moodmosaic/Fare): Library for generating random strings based on regex expressions. By Nikos Baxevanis
+- [**Newtonsoft.Json**](): Library for easily converting between c# objects and json. By James Newton-King
 <br><br>
 
 ## Credits
@@ -55,7 +58,7 @@ I have split the project into 4 directories
 <div style="display: flex; flex-direction: row;">
 <a style="margin-left: 10px" href="https://github.com/Dagor94">Dagor94</a>
 <p style="margin-left: 5px; padding-right: 5px">- Contribution:</p>
-	
+
 [Design and styling of pages/windows.](https://github.com/Dagor94/ENL_Distribution)
 
 </div>
