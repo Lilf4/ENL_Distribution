@@ -55,7 +55,7 @@ namespace ENF_Dist_Test.Validators {
                                 Database.Instance.UpdateProduct(k.Product, k.Product.ProductId);
                             }
                         });
-                    orders.AddRange(order.Generate(rand.Next(0, genInfo.maxOrdPerEmployee)));
+                    orders.AddRange(order.Generate(rand.Next(genInfo.minOrdPerEmployee, genInfo.maxOrdPerEmployee)));
 
                     Database.Instance.UpdateEmployee(u, u.EmployeeId);
                 });
@@ -83,8 +83,8 @@ namespace ENF_Dist_Test.Validators {
             Location location = new Location();
 
             while (true) {
-                location.Row = rand.Next(0, maxValue);
-                location.Column = rand.Next(0, maxValue);
+                location.Row = rand.Next(1, maxValue + 1);
+                location.Column = rand.Next(1, maxValue + 1);
                 var match = Exclusions.Where(i => (i.LocationId == location.LocationId));
                 if (match.Count() <= 0) { break; }
             }
