@@ -47,7 +47,9 @@ namespace ENF_Dist_Test.Pages {
             orderEdit.ShowDialog();
             if (!orderEdit.AddCancel) {
                 if (orderEdit.Order.OrderStatus == Order.Status.Finished) {
+                    orderEdit.Order.OrderId = Database.Instance.InsertOrder(orderEdit.Order);
                     Database.Instance.InsertFinishedOrder(orderEdit.Order);
+                    Database.Instance.DeleteOrder(orderEdit.Order.OrderId);
                     FinishOrder(orderEdit.Order);
                 }
                 else {

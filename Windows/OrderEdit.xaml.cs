@@ -50,7 +50,7 @@ namespace ENF_Dist_Test.Windows {
                 }
             }
 
-            StatusCombo.ItemsSource = Enum.GetValues(typeof(Order.Status)).Cast<Order.Status> ();
+            StatusCombo.ItemsSource = Enum.GetValues(typeof(Order.Status)).Cast<Order.Status>();
             StatusCombo.SelectedIndex = (int)Order.OrderStatus;
         }
 
